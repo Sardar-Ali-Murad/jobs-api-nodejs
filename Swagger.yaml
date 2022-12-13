@@ -1,0 +1,245 @@
+openapi: 3.0.0
+info:
+  title: DocumentationJobs
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobs-api-docs.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /jobs:
+    post:
+      tags:
+      - Jobs
+      summary: createJob
+      operationId: createJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createrequest'
+              - example:
+                  name: Eman11
+                  position: netflix11
+            example:
+              name: Eman11
+              position: netflix11
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Jobs
+      summary: currentUserJobs
+      operationId: currentUserJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job 
+    delete:
+      tags:
+      - Jobs
+      summary: deleteJob
+      operationId: deleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  # /jobs/{id}:
+  #   parameters:
+  #     - in: path
+  #       name: id
+  #       schema:
+  #         type: string
+  #       required: true
+  #       description: The job ID
+    put:
+      tags:
+      - Jobs
+      summary: updateJob
+      operationId: updateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updaterequest'
+              - example:
+                  status: pending
+            example:
+              status: pending
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/getAllJobs:
+    get:
+      tags:
+      - Jobs
+      summary: getAllJobs
+      operationId: getAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterRequest'
+              - example:
+                  name: Eman
+                  email: eman@gmail.com
+                  password: '123'
+            example:
+              name: Eman
+              email: eman@gmail.com
+              password: '123'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: sardar@gmail.com
+                  password: '123'
+            example:
+              email: sardar@gmail.com
+              password: '123'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    createrequest:
+      title: createrequest
+      required:
+      - name
+      - position
+      type: object
+      properties:
+        name:
+          type: string
+        position:
+          type: string
+      example:
+        name: Eman11
+        position: netflix11
+    updaterequest:
+      title: updaterequest
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+      example:
+        status: pending
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Eman
+        email: eman@gmail.com
+        password: '123'
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: sardar@gmail.com
+        password: '123'
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Docs Posts
+- name: Misc
+  description: ''
+- name: Jobs
+  description: ''
+- name: Auth
+  description: ''
